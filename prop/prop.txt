@@ -1,0 +1,49 @@
+
+
+
+GetG ::= [GetFunc]+
+GetFunc ::= func GetId([var GetId][,var GetId]*)
+{
+[GetOp;]+
+}
+GetOp ::= GetVar | GetIf | GetReturn | GetPrint | GetAct
+GetAct ::= GetId =  GetCall | GetId | GetE
+GetCall ::= GetId([GetId][,GetId]*)
+GetId ::= [a-z][a-z0-9]* //'I'
+GetIf ::= if( GetCond ){[GetOp]+} //'i'
+GetCond ::= GetId < | > | = GetId 
+GetVar(Func * func) ::= var GetId // no node creation
+GetReturn ::= return(GetId)
+GetPrint ::= print(GetId)
+GetIdvar ::= GetId
+
+GetE ::= GetT [[+-]GetT]?
+GetT ::= GetP [[*/]GetP]?
+GetP ::= (GetE) | GetN | GetIdVar 
+GetN ::= [+-]?[0-9]+[.]?[0-9]* // 'N'
+
+func recur(var a)
+{
+var one;
+one = 1;
+if( a > one)
+{
+var b;
+var c;
+c = a - 1;
+b = recur(c);
+var r;
+r = b * a;
+return(r);
+}
+return(one);
+}
+
+func main(var a)
+{
+a = 5;
+var b;
+b = recur(a);
+print(b);
+return(a);
+}

@@ -1,0 +1,25 @@
+func recur(var a)
+{
+    var one;
+    one = 1;
+    if( a > one)
+    {
+        var b;
+        var c;
+        c = a - 1;
+        b = recur(c);
+        var r;
+        r = b * a;
+        return(r);
+    }
+    return(one);
+}
+
+func main(var a)
+{
+    a = 5;
+    var b;
+    b = recur(a);
+    print(b);
+    return(a);
+}
